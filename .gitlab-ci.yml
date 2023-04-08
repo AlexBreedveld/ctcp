@@ -8,7 +8,7 @@ build:
     - x86-64
   before_script:
     - echo "Setting up packages for Build"
-    - apt-get update && apt-get install zip make autoconf cmake rsync c++ -y
+    - apt-get update && apt-get install zip make rsync c++ -y
   script:
     - make
     - echo "Preparing release"
