@@ -1,0 +1,46 @@
+image: debian:latest
+
+build:
+  stage: build
+  image: debian:latest
+  tags:
+    - docker
+    - x86-64
+  before_script:
+    - echo "Setting up packages for Build"
+    - apt-get update && apt-get install zip make autoconf cmake rsync gcc c++ -y
+  script:
+    - make
+    - echo "Preparing release"
+    - zip -r build.zip ./build
+  after_script:
+    - echo "JOB_ID=$CI_JOB_ID" >> job.env
+  artifacts:
+     paths:
+       - build.zip
+     expire_in: never
+     reports:
+       dotenv: job.env
+
+create:release:
+  stage: deploy
+  tags:
+    - docker
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  needs:
+    - job: build
+      artifacts: true
+  variables:
+    TAG: '$CI_COMMIT_SHA'
+  script:
+    - echo "Create Release $TAG"
+    - echo $JOB_ID
+  release:
+    name: 'cTCP Release $TAG'
+    tag_name: '$TAG'
+    ref: '$TAG'
+    description: 'Release $TAG'
+    assets:
+      links:
+        - name: "build.zip"
+          url: "https://git.al3xdev.com/al3xdev/ctcp/-/jobs/$JOB_ID/artifacts/download"

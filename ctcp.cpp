@@ -18,7 +18,7 @@ void * send_client(void * m) {
 
 	while(1) {
 		if(!tcp.is_online() && tcp.get_last_closed_sockets() == desc->id) {
-			cerr << "Connessione chiusa: stop send_clients( id:" << desc->id << " ip:" << desc->ip << " )"<< endl;
+			cerr << "Connection closed: stop send_clients( id:" << desc->id << " ip:" << desc->ip << " )"<< endl;
 			break;
 		}
 		std::time_t t = std::time(0);
@@ -56,7 +56,7 @@ void * received(void * m)
 				{
 					desc[i]->enable_message_runtime = true;
 			                if( pthread_create(&msg1[num_message], NULL, send_client, (void *) desc[i]) == 0) {
-						cerr << "ATTIVA THREAD INVIO MESSAGGI" << endl;
+						cerr << "ACTIVATE THREAD SENDING MESSAGES" << endl;
 					}
 					num_message++;
 					// start message background thread
@@ -97,6 +97,6 @@ int main(int argc, char **argv)
 		}
 	}
 	else
-		cerr << "Errore apertura socket" << endl;
+		cerr << "Error in opening socket" << endl;
 	return 0;
 }

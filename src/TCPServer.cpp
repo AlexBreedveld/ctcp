@@ -64,7 +64,7 @@ int TCPServer::setup(int port, vector<int> opts)
 
 	for(unsigned int i = 0; i < opts.size(); i++) {
 		if( (setsockopt(sockfd, SOL_SOCKET, opts.size(), (char *)&opt, sizeof(opt))) < 0 ) {
-			cerr << "Errore setsockopt" << endl; 
+			cerr << "Error setsockopt" << endl;
       			return -1;
 	      	}
 	}
@@ -74,12 +74,12 @@ int TCPServer::setup(int port, vector<int> opts)
 	serverAddress.sin_port        = htons(port);
 
 	if((::bind(sockfd,(struct sockaddr *)&serverAddress, sizeof(serverAddress))) < 0){
-		cerr << "Errore bind" << endl;
+		cerr << "Error in binding port" << endl;
 		return -1;
 	}
 	
  	if(listen(sockfd,5) < 0){
-		cerr << "Errore listen" << endl;
+		cerr << "Error listening" << endl;
 		return -1;
 	}
 	num_client = 0;
