@@ -12,12 +12,12 @@ build_amd64:
   script:
     - make
     - echo "Preparing release"
-    - zip -r cTCP-x86_64.zip ./build
+    - chmod +x ./build/ctcp
   after_script:
     - echo "JOB_ID=$CI_JOB_ID" >> job.env
   artifacts:
      paths:
-       - cTCP-x86_64.zip
+       - ./build/ctcp
      expire_in: never
      reports:
        dotenv: job.env
@@ -34,12 +34,12 @@ build_arm64:
   script:
     - make
     - echo "Preparing release"
-    - zip -r cTCP-arm64.zip ./build
+    - chmod +x ./build/ctcp
   after_script:
-    - echo "JOB_ID=$CI_JOB_ID" >> job.env
+    - echo "JOB_ID_ARM64=$CI_JOB_ID" >> job.env
   artifacts:
      paths:
-       - cTCP-arm64.zip
+       - ./build/ctcp
      expire_in: never
      reports:
        dotenv: job.env
@@ -58,7 +58,8 @@ create:release:
     TAG: '$CI_COMMIT_SHA'
   script:
     - echo "Create Release $TAG"
-    - echo $JOB_ID
+    - echo "AMD64:\ $JOB_ID"
+    - echo "ARM64:\ $JOB_ID_ARM64"
   release:
     name: 'cTCP Release $TAG'
     tag_name: '$TAG'
@@ -66,7 +67,7 @@ create:release:
     description: 'Release $TAG'
     assets:
       links:
-        - name: "cTCP-x86_64.zip"
+        - name: "cTCP-x86_64"
           url: "https://git.al3xdev.com/al3xdev/ctcp/-/jobs/$JOB_ID/artifacts/download"
-        - name: "cTCP-arm64.zip"
-          url: "https://git.al3xdev.com/al3xdev/ctcp/-/jobs/$JOB_ID/artifacts/download"
+        - name: "cTCP-arm64"
+          url: "https://git.al3xdev.com/al3xdev/ctcp/-/jobs/$JOB_ID_ARM64/artifacts/download"
