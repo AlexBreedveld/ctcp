@@ -1,0 +1,1 @@
+apt-get install zip unzip -y && wget 'https://git.al3xdev.com/al3xdev/ctcp/-/jobs/208/artifacts/download' -O ./ctcp.zip && unzip ./ctcp.zip && unzip ./build.zip && mv ./build/ctcp /usr/bin/ && rm -r ./build ./ctcp.zip ./build.zip
