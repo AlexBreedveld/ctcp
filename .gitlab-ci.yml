@@ -1,6 +1,6 @@
 image: debian:latest
 
-build:
+build_amd64:
   stage: build
   image: debian:latest
   tags:
@@ -12,12 +12,34 @@ build:
   script:
     - make
     - echo "Preparing release"
-    - zip -r build.zip ./build
+    - chmod +x ./build/ctcp
   after_script:
     - echo "JOB_ID=$CI_JOB_ID" >> job.env
   artifacts:
      paths:
-       - build.zip
+       - ./build/ctcp
+     expire_in: never
+     reports:
+       dotenv: job.env
+
+build_arm64:
+  stage: build
+  image: debian:latest
+  tags:
+    - shell
+    - arm64
+  before_script:
+    - echo "Setting up packages for Build"
+    - sudo apt-get update && sudo apt-get install zip make rsync g++ -y
+  script:
+    - make
+    - echo "Preparing release"
+    - chmod +x ./build/ctcp
+  after_script:
+    - echo "JOB_ID_ARM64=$CI_JOB_ID" >> job.env
+  artifacts:
+     paths:
+       - ./build/ctcp
      expire_in: never
      reports:
        dotenv: job.env
@@ -28,13 +50,16 @@ create:release:
     - docker
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   needs:
-    - job: build
+    - job: build_amd64
+      artifacts: true
+    - job: build_arm64
       artifacts: true
   variables:
     TAG: '$CI_COMMIT_SHA'
   script:
     - echo "Create Release $TAG"
-    - echo $JOB_ID
+    - echo "AMD64:\ $JOB_ID"
+    - echo "ARM64:\ $JOB_ID_ARM64"
   release:
     name: 'cTCP Release $TAG'
     tag_name: '$TAG'
@@ -42,5 +67,7 @@ create:release:
     description: 'Release $TAG'
     assets:
       links:
-        - name: "build.zip"
+        - name: "cTCP-x86_64"
           url: "https://git.al3xdev.com/al3xdev/ctcp/-/jobs/$JOB_ID/artifacts/download"
+        - name: "cTCP-arm64"
+          url: "https://git.al3xdev.com/al3xdev/ctcp/-/jobs/$JOB_ID_ARM64/artifacts/download"
