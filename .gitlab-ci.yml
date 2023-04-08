@@ -4,7 +4,7 @@ build:
   stage: build
   image: debian:latest
   tags:
-    - docker
+    - shell
     - x86-64
   before_script:
     - echo "Setting up packages for Build"
