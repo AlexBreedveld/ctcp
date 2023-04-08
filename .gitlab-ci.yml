@@ -8,7 +8,7 @@ build:
     - x86-64
   before_script:
     - echo "Setting up packages for Build"
-    - sudo apt-get update && sudo apt-get install zip make rsync c++ -y
+    - sudo apt-get update && sudo apt-get install zip make rsync g++ -y
   script:
     - make
     - echo "Preparing release"
