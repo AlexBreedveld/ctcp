@@ -1,0 +1,6 @@
+tasks:
+  - name: vscode
+    before: |
+      mkdir /workspace/ctcp/.vscode/
+      touch /workspace/ctcp/.vscode/settings.json
+      echo "{"workbench.colorTheme": "Gitpod Dark"}" >> /workspace/ctcp/.vscode/settings.json
