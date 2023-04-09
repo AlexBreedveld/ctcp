@@ -1,1 +1,0 @@
-mv ./ctcp /usr/bin/ && rm -r ../build/

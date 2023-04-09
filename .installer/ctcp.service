@@ -1,0 +1,14 @@
+[Unit]
+Description=cTCP Server
+After=network.target
+After=systemd-user-sessions.service
+After=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=ctcp $(cat /etc/ctcp/ctcp.json | jq -r ".port")
+
+[Install]
+WantedBy=multi-user.target
+
