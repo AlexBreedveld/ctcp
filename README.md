@@ -4,6 +4,11 @@ A simple TCP listener/server written in C++
 
 ## Installation (Debian-based distros):
 - Download the latest release on: https://git.al3xdev.com/al3xdev/ctcp/-/releases
+
+<pre><code>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ wget 'latest release asset link' -O ./artifacts.zip
+</code></pre>
+
 - Run the installer (<b>as root</b>) on the same directory of the downloaded file:
 
 <pre><code>
