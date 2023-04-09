@@ -8,12 +8,12 @@ A simple TCP listener/server written in C++
 
 <pre><code>
 &nbsp;&nbsp;<b>For x86_64:</b>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ ctcp &ltport&gt
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ wget 'https://git.al3xdev.com/al3xdev/ctcp/-/raw/master/.installer/amd64.sh' -O ./ctcp-amd64.sh && sudo bash ./ctcp-amd64.sh
 </code></pre>
 
 <pre><code>
 &nbsp;&nbsp;<b>For ARM64:</b>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ ctcp &ltport&gt
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ wget 'https://git.al3xdev.com/al3xdev/ctcp/-/raw/master/.installer/arm64.sh' -O ./ctcp-arm64.sh && sudo bash ./ctcp-arm64.sh
 </code></pre>
 
 ## Usage:
