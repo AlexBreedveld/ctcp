@@ -83,30 +83,40 @@ void * received(void * m)
 
 int main()
 {
-    int argc;
-    char **argv;
+    int argc, argv;
+    //char **argv;
     system("touch /etc/ctcp/.port && touch /etc/ctcp/.secs");
     system("rm /etc/ctcp/.port && rm /etc/ctcp/.secs");
 	system("touch /etc/ctcp/.port && cat /etc/ctcp/ctcp.json | jq -r "".port"" >> /etc/ctcp/.port" );
-    argc = open("/etc/ctcp/.port", O_RDWR | O_CREAT, 0777);
+    //argc = open("/etc/ctcp/.port", O_RDWR | O_CREAT, 0777);
+    FILE *fport;
+    fport = fopen("/etc/ctcp/.port", "r");
+    rewind(fport);
+    fscanf(fport, "%d", &argc);
 	system("touch /etc/ctcp/.secs && cat /etc/ctcp/ctcp.json | jq -r "".secs"" >> /etc/ctcp/.secs");
-    argv = reinterpret_cast<char **>(open("/etc/ctcp/.secs", O_RDWR | O_CREAT, 0777));
+    //argv = (open("/etc/ctcp/.secs", O_RDWR | O_CREAT, 0777));
+    FILE *fsecs;
+    fsecs = fopen("/etc/ctcp/.secs", "r");
+    rewind(fsecs);
+    fscanf(fsecs, "%d", &argv);
+    printf("Port: %d, Secs: %d", argc, argv);
+    fclose(fport);
+    fclose(fsecs);
+    fflush(stdout);
 
-
-    printf("Port: %d %c", argc, argv);
 
 	if(argc < 2) {
 		cerr << "Usage: ./server port (opt)time-send" << endl;
 		return 0;
 	}
 	if(argc == 3)
-		time_send = atoi(argv[2]);
+		time_send = argv;
 	std::signal(SIGINT, close_app);
 
 	pthread_t msg;
         vector<int> opts = { SO_REUSEPORT, SO_REUSEADDR };
 
-	if( tcp.setup(atoi(argv[1]),opts) == 0) {
+	if( tcp.setup(argc,opts) == 0) {
 		if( pthread_create(&msg, NULL, received, (void *)0) == 0)
 		{
 			while(1) {
