@@ -1,12 +1,21 @@
 # cTCP
 
-A simple TCP listener/server written in C++
+A simple TCP listener/server written in C++.
+
+## Description:
+
+> Useful for pinging servers that share the same public IP address.
+> Precompiled for x86_64 and aarch64 systems.
+
+## Dependencies:
+
+`jq, unzip.`
 
 ## Installation (Debian-based distros):
 
 - Run the installer (<b>as root</b>):
 
-<pre><code>&nbsp;&nbsp;wget 'https://git.al3xdev.com/al3xdev/ctcp/-/snippets/1/raw/main/download.sh' -O ./ctcp-install.sh && sudo bash ./ctcp-install.sh</code></pre>
+<pre><code>wget 'https://git.al3xdev.com/al3xdev/ctcp/-/snippets/1/raw/main/download.sh' -O ./ctcp-install.sh && sudo bash ./ctcp-install.sh</code></pre>
 
 ## Upgrade:
 
@@ -17,6 +26,11 @@ A simple TCP listener/server written in C++
 <pre><code>wget 'https://git.al3xdev.com/al3xdev/ctcp/-/snippets/1/raw/main/uninstall.sh' -O ./ctcp-uninstall.sh && sudo bash ./ctcp-uninstall.sh</code></pre>
 
 ## Usage:
-<pre><code>ctcp</code></pre>
+
+<pre><code>systemctl status/start/stop/restart ctcp.service</code></pre>
+
+## Configuration:
+
+> Edit the JSON file at: /etc/ctcp/ctcp.json
 
 Fork of: https://github.com/kashimAstro/SimpleNetwork

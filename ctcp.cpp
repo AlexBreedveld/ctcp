@@ -99,7 +99,7 @@ int main()
     fsecs = fopen("/etc/ctcp/.secs", "r");
     rewind(fsecs);
     fscanf(fsecs, "%d", &argv);
-    printf("Port: %d, Secs: %d", argc, argv);
+    printf("\nPort: %d, Secs: %d\n", argc, argv);
     fclose(fport);
     fclose(fsecs);
     fflush(stdout);
