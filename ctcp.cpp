@@ -85,7 +85,8 @@ int main()
 {
     int argc;
     char **argv;
-    system("bash /opt/ctcp/init.sh");
+    system("touch /etc/ctcp/.port && touch /etc/ctcp/.secs");
+    system("rm /etc/ctcp/.port && rm /etc/ctcp/.secs");
 	system("touch /etc/ctcp/.port && cat /etc/ctcp/ctcp.json | jq -r "".port"" >> /etc/ctcp/.port" );
     argc = open("/etc/ctcp/.port", O_RDWR | O_CREAT, 0777);
 	system("touch /etc/ctcp/.secs && cat /etc/ctcp/ctcp.json | jq -r "".secs"" >> /etc/ctcp/.secs");

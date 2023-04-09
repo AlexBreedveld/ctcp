@@ -7,7 +7,6 @@ mkdir -p /etc/ctcp/
 touch /etc/ctcp/ctcp.json
 echo -e "{\n \"port\": \"5520\",\n \"secs\": \"1\"\n}" >> /etc/ctcp/ctcp.json
 wget 'https://git.al3xdev.com/al3xdev/ctcp/-/raw/master/.installer/ctcp.service' -O /etc/systemd/system/ctcp.service
-wget 'https://git.al3xdev.com/al3xdev/ctcp/-/raw/master/.installer/init.sh' -O /opt/ctcp/init.sh
 systemctl daemon-reload && systemctl enable ctcp.service && systemctl start ctcp.service
 rm -r /opt/ctcp/build/
 clear
