@@ -1,9 +1,6 @@
-<a href="https://git.al3xdev.com/al3xdev/ctcp/-/pipelines" target="_blank" title="View Pipelines">
-  <img
-    src="https://git.al3xdev.com/al3xdev/ctcp/badges/main/pipeline.svg"
-    alt="Pipeline"
-  />
-</a>
+
+<a href="https://git.al3xdev.com/al3xdev/ctcp/-/commits/master"><img alt="pipeline status" src="https://git.al3xdev.com/al3xdev/ctcp/badges/master/pipeline.svg" /></a>
+
 <a href="https://git.al3xdev.com/al3xdev/ctcp" target="_blank" title="Open Page">
   <img
     src="https://img.shields.io/badge/GitLab-repo-908a85?logo=gitlab"
