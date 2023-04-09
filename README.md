@@ -1,7 +1,4 @@
-
-<a href="https://git.al3xdev.com/al3xdev/ctcp/-/commits/master"><img alt="pipeline status" src="https://git.al3xdev.com/al3xdev/ctcp/badges/master/pipeline.svg" /></a>
-
-<a href="https://git.al3xdev.com/al3xdev/ctcp" target="_blank" title="Open Page">
+<a href="https://git.al3xdev.com/al3xdev/ctcp/-/commits/master"><img alt="pipeline status" src="https://git.al3xdev.com/al3xdev/ctcp/badges/master/pipeline.svg" /></a> <a href="https://git.al3xdev.com/al3xdev/ctcp" target="_blank" title="Open Page">
   <img
     src="https://img.shields.io/badge/GitLab-repo-908a85?logo=gitlab"
     alt="GitLab Pages"
