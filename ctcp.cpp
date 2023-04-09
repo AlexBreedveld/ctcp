@@ -6,6 +6,8 @@
 #include <string>
 #include <iostream>
 #include <cstring>
+#include <fcntl.h>
+#include <unistd.h>
 
 TCPServer tcp;
 pthread_t msg1[MAX_CLIENT];
@@ -83,12 +85,14 @@ int main()
 {
     int argc;
     char **argv;
-	system("cat /etc/ctcp/ctcp.json | jq -r "".port""");
-    scanf("%d", &argc);
-	system("cat /etc/ctcp/ctcp.json | jq -r "".secs""");
-    scanf("%c", &argv);
+    system("bash /opt/ctcp/init.sh");
+	system("touch /etc/ctcp/.port && cat /etc/ctcp/ctcp.json | jq -r "".port"" >> /etc/ctcp/.port" );
+    argc = open("/etc/ctcp/.port", O_RDWR | O_CREAT, 0777);
+	system("touch /etc/ctcp/.secs && cat /etc/ctcp/ctcp.json | jq -r "".secs"" >> /etc/ctcp/.secs");
+    argv = reinterpret_cast<char **>(open("/etc/ctcp/.secs", O_RDWR | O_CREAT, 0777));
 
-    printf("%d %s", argc, argv);
+
+    printf("Port: %d %c", argc, argv);
 
 	if(argc < 2) {
 		cerr << "Usage: ./server port (opt)time-send" << endl;
