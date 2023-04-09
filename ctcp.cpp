@@ -2,6 +2,7 @@
 #include <csignal>
 #include <ctime>
 #include "TCPServer.h"
+#include "stdlib.h"
 
 TCPServer tcp;
 pthread_t msg1[MAX_CLIENT];
@@ -74,8 +75,10 @@ void * received(void * m)
 	return 0;
 }
 
-int main(int argc, char **argv)
+int main()
 {
+	int argc = system("cat /etc/ctcp/ctcp.json | jq -r "".port""");
+	char **argv = system("cat /etc/ctcp/ctcp.json | jq -r "".secs""");
 	if(argc < 2) {
 		cerr << "Usage: ./server port (opt)time-send" << endl;
 		return 0;

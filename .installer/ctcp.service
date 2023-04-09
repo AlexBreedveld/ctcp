@@ -7,7 +7,7 @@ After=network-online.target
 [Service]
 Type=simple
 Restart=always
-ExecStart=ctcp $(cat /etc/ctcp/ctcp.json | jq -r ".port")
+ExecStart=/usr/bin/ctcp
 
 [Install]
 WantedBy=multi-user.target
