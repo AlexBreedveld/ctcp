@@ -32,9 +32,7 @@ build_arm64:
     - echo "Setting up packages for Build"
     - sudo apt-get update && sudo apt-get install zip make rsync g++-aarch64-linux-gnu -y
   script:
-    - cd ./.installer
     - bash ./.installer/clean.sh
-    - cd ..
     - sleep 2
     - mkdir ./build
     - aarch64-linux-gnu-g++ -Wall -o ./build/ctcp ctcp.cpp -I./src/ ./src/TCPServer.cpp ./src/TCPClient.cpp -std=c++11 -lpthread -static
