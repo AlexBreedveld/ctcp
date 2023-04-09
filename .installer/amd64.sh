@@ -1,7 +1,7 @@
 #!/bin/bash
 
 apt-get update && apt-get install unzip jq -y
-unzip /opt/ctcp/artifacts.zip
+unzip /opt/ctcp/artifacts.zip -d /opt/ctcp/
 mv /opt/ctcp/build/ctcp /usr/bin/
 mkdir -p /etc/ctcp/
 touch /etc/ctcp/ctcp.json
