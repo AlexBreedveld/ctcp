@@ -11,6 +11,8 @@ github-deploy:
   image: debian:latest
   tags:
     - docker
+  variables:
+         SECURE_FILES_DOWNLOAD_PATH: './ssh/'
   script:
       - apt-get update
       - apt-get install openssh-client ssh curl rsync git -y
