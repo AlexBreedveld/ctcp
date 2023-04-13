@@ -1,7 +1,35 @@
 image: debian:latest
 
+stages:
+  - prepare
+  - build-x86-64
+  - build-arm64
+  - deploy
+
+github-deploy:
+  stage: prepare
+  image: debian:latest
+  tags:
+    - docker
+  script:
+      - mkdir ./ssh
+      - mkdir ./nodeping
+      - curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
+      - chmod -R 600 ./ssh
+      - mkdir -p ~/.ssh/
+      - cp ./ssh/id_rsa ~/.ssh/
+      - cp ./ssh/known_hosts ~/.ssh/
+      - cp ./ssh/id_rsa.pub ~/.ssh/
+      - rm -r ./ssh
+      - git remote remove origin
+      - git config --global user.name "AL3XDev GitLab CI/CD"
+      - git config --global user.email "support@al3xdev.com"
+      - git remote add origin git@github.com:AlexBreedveld/ctcp.git
+      - git checkout -b main
+      - git push origin main
+
 build_amd64:
-  stage: build
+  stage: build-x86-64
   image: debian:latest
   tags:
     - shell
@@ -23,7 +51,7 @@ build_amd64:
        dotenv: job.env
 
 build_arm64:
-  stage: build
+  stage: build-arm64
   image: debian:latest
   tags:
     - shell
