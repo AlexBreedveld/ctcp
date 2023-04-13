@@ -12,6 +12,8 @@ github-deploy:
   tags:
     - docker
   script:
+      - apt-get update
+      - apt-get install openssh-client ssh curl rsync git -y
       - mkdir ./ssh
       - mkdir ./nodeping
       - curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
